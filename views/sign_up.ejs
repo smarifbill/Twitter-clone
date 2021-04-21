@@ -1,0 +1,177 @@
+<!--include header-->
+<%- include('partials/_header') %>
+<!--/include header-->
+
+<!--Main Site-->
+<main id="site-main">
+  <div class="container">
+    <div class="header">
+      <h2>Create Account</h2>
+    </div>
+
+    <form class="form" id="form" action="/users/public" method="POST">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" name="name" placeholder="Firstname" id="firstname" />
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error Message</small>
+      </div>
+      <div class="form-group">
+        <label>Surname</label>
+        <input type="text" name="surname" placeholder="Surname" id="surname" />
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error Message</small>
+      </div>
+
+      <div class="form-group">
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          placeholder="example@gmail.com"
+          id="email"
+        />
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error Message</small>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          id="password"
+        />
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error Message</small>
+      </div>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          name="password2"
+          placeholder="retype password"
+          id="password2"
+        />
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error Message</small>
+      </div>
+      <button type="submit">Submit</button>
+      <p class="message">Already registered? <a href="/login">Sign In</a></p>
+    </form>
+  </div>
+</main>
+<!--/Main Site-->
+
+<!--<script type="text/javascript" src="/static/js/formValidation.js"></script>-->
+<script type="text/javascript">
+  const form = document.getElementById("form");
+  const firstname = document.getElementById("firstname");
+  const surname = document.getElementById("surname");
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+  const password2 = document.getElementById("password2");
+  //const btn = document.querySelector("button");
+
+  form.addEventListener("submit", (e) => {
+    //prevent the form from submitting
+    //comment out preventDefault()because it was not allowing form to submit
+    //e.preventDefault();
+
+    checkInput();
+  });
+
+  function checkInput() {
+    //get the values from the inputs
+    const firstnameValue = firstname.value.trim();
+    const surnameValue = surname.value.trim();
+    const emailValue = email.value.trim();
+    const passwordValue = password.value.trim();
+    const password2Value = password2.value.trim();
+
+    if (firstnameValue === "") {
+      //show error & add error class
+      setError(firstname, "Firstname is required");
+    } else {
+      // add success class
+      setSuccess(firstname);
+    }
+
+    if (surnameValue === "") {
+      //show error & add error class
+      setError(surname, "Surname is required");
+    } else {
+      // add success class
+      setSuccess(surname);
+    }
+
+    if (emailValue === "") {
+      //show error & add error class
+      setError(email, "Email is required");
+    } else if (!isEmail(emailValue)) {
+      setError(email, "Email is not valid");
+    } else {
+      // add success class
+      setSuccess(email);
+    }
+
+    if (passwordValue === "") {
+      //show error & add error class
+      setError(password, "Password is required");
+    } else {
+      setSuccess(password);
+    }
+
+    if (password2Value === "") {
+      //show error & add error class
+      setError(password2, "Password is required");
+    } else if (passwordValue !== password2Value) {
+      setError(password2, "Password does not match");
+    } else {
+      // add success class
+      setSuccess(password2);
+    }
+  }
+
+  function setError(input, message) {
+    const formControl = input.parentElement; //,form-control
+    const small = formControl.querySelector("small");
+
+    //add error message inside small
+    small.innerText = message;
+
+    //add error class
+    formControl.className = "form-group error";
+  }
+
+  function setSuccess(input) {
+    const formControl = input.parentElement; //,form-control
+
+    //add error class
+    formControl.className = "form-group success";
+  }
+
+  function isEmail(email) {
+    return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      email
+    );
+  }
+
+  /*
+  function checkPassword(password) {
+      var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,8}$/;
+      if(password.value.match(passw)) {
+        return true;
+      }
+  } 
+ */
+</script>
+
+<!--include footer-->
+<%- include('partials/_footer') %>
+<!--/include footer-->

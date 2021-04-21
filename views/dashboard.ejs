@@ -1,0 +1,97 @@
+<!--include header-->
+<%- include('partials/_header') %>
+<!--/include header-->
+
+<!--Main Site-->
+<main id="site-main">
+<div class="container-box">
+    <h5 class="greeting">Welcome <%= name %> !</h5>
+    
+      <div class="logout">
+      <p>Do you want to logout? <a class="logoutlink" href="/logout">Logout</a></p>
+    </div>
+    <div class="wallcontainer">
+      <div class="profilecard">
+        <div class="profilecardhead"></div>
+        <div class="profilecardimagediv">
+          <img src="/img/kumen.JPG" />
+        </div>
+
+        <div class="profilecardnameidcont">
+          <div class="profilecardnamecont">
+            <span id="profilecardname"></span>
+          </div>
+          <span id="profilecarduid"></span>
+        </div>
+
+        <div class="profilecardstatsdiv">
+          <ul class="profilecardstatslist">
+            <li class="profilecardstatslistitem">
+              <span class="dispblk">
+                <span class="statslistitemhead">Tweets</span>
+                <span id="statscount" class="statscount"
+                  >0</span
+                >
+              </span>
+            </li>
+
+            <li class="profilecardstatslistitem">
+              <span class="dispblk">
+                <span class="statslistitemhead">Following</span>
+                <span class="statscount">35</span>
+              </span>
+            </li>
+
+            <li class="profilecardstatslistitem">
+              <span class="dispblk">
+                <span class="statslistitemhead">Followers</span>
+                <span class="statscount">34</span>
+              </span>
+            </li>
+          </ul>
+        </div> <!-- / profilecardstatsdiv -->
+      </div> <!-- / profilecard -->
+
+
+    <form action="/api/posts" method="POST">
+      <div class="rightcontainer">
+        <div class="posttweetcontainer">
+          <img class="posttweetprofimg" src="/img/kumen.JPG" />
+          <div class="ml56px">
+            <div class="posttweetcont">
+              <textarea name="tweet" id="posttweet"
+                class="posttweet"
+                placeholder="What's happening...?"
+              ></textarea>
+              </div> <!--posttweetcont ends here-->
+              <div class="posttweetcountcont">
+                <span class="posttweetcount"
+                  ><span id="totalchars">0</span>/250</span
+                >
+              </div>
+            </div>
+            <div class="posttweetbutcont">
+              <button type="submit" id="posttweetbut" class="posttweetbut">Tweet</button>
+            </div> <!--posttweetbutcont ends here-->
+          </div> <!--ml56px ends here-->
+        </div> <!--posttweetcontainer ends here-->
+        <!--
+          <div>
+          <ul id="tweetscontainer" class="tweetscontainer"></ul>
+        </div>
+        -->
+      </div> <!--rightcontainer ends here-->
+    </div> <!--wallcontainer ends here-->
+  
+      
+    </form> <!--container-box ends here-->
+    
+  </div>
+
+  
+</main>
+<!--/Main Site-->
+
+<!--include footer-->
+<%- include('partials/_footer') %>
+<!--/include footer-->

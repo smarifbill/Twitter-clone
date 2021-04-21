@@ -1,0 +1,121 @@
+<!--include header-->
+<%- include('partials/_header') %>
+<!--/include header-->
+
+<!--Main Site-->
+<main id="site-main">
+  <div class="greeting"><h1>Welcome to Tweet!</h1></div>
+  <!--
+    <% for(var i=0; i < tweet.length; i++) { %>
+  -->
+  <div class="profilecard">
+    <div class="profilecardhead">
+      <div class="username-box">
+        <% for(var i=0; i < user.length; i++) { %> <%= user[i].name %> <% } %>
+      </div>
+    </div>
+    <div class="profilecardimagediv">
+      <img src="/img/kumen.JPG" />
+    </div>
+
+    <div class="profilecardnameidcont">
+      <div class="profilecardnamecont">
+        <span id="profilecardname"></span>
+      </div>
+      <span id="profilecarduid"></span>
+      <div class="tweet-msg">
+        <% for(var i=0; i < tweet.length; i++) { %><%= tweet[i].content %><% }
+        %>
+      </div>
+    </div>
+
+    <div class="profilecardstatsdiv">
+      <ul class="profilecardstatslist">
+        <li class="profilecardstatslistitem">
+          <span class="dispblk">
+            <span class="statslistitemhead"
+              ><button onclick="displayCountLike()">
+                <i class="far fa-thumbs-up"></i></button
+            ></span>
+            <span id="statscountlike" class="statscount">0</span>
+          </span>
+        </li>
+        <li class="profilecardstatslistitem">
+          <span class="dispblk">
+            <span class="statslistitemhead"
+              ><button onclick="displayCountDislike()">
+                <i class="far fa-thumbs-down"></i></button
+            ></span>
+            <span id="statscountdislike" class="statscount">0</span>
+          </span>
+        </li>
+        <li class="profilecardstatslistitem">
+          <span class="dispblk">
+            <span class="statslistitemhead"
+              ><button onclick="displayCountLove()">
+                <i class="far fa-heart"></i></button
+            ></span>
+            <span id="statscountlove" class="statscount">0</span>
+          </span>
+        </li>
+
+        <li class="profilecardstatslistitem">
+          <span class="dispblk">
+            <span class="statslistitemhead">Following</span>
+            <span class="statscount">35</span>
+          </span>
+        </li>
+
+        <li class="profilecardstatslistitem">
+          <span class="dispblk">
+            <span class="statslistitemhead">Followers</span>
+            <span class="statscount">34</span>
+          </span>
+        </li>
+      </ul>
+    </div>
+    <!-- / profilecardstatsdiv -->
+  </div>
+  <!--<% } %>-->
+  <!-- / profilecard put the for tweet loop outside so that message of goes in div body and creates new div-->
+</main>
+<!--/Main Site-->
+
+<script type="text/javascript">
+  var countLike = (function () {
+    var counter = 0;
+    return function () {
+      return (counter += 1);
+    };
+  })();
+
+  var countDislike = (function () {
+    var counter = 0;
+    return function () {
+      return (counter += 1);
+    };
+  })();
+
+  var countLove = (function () {
+    var counter = 0;
+    return function () {
+      return (counter += 1);
+    };
+  })();
+
+  function displayCountLike() {
+    document.getElementById("statscountlike").innerHTML = countLike();
+  }
+
+  function displayCountDislike() {
+    document.getElementById("statscountdislike").innerHTML = countDislike();
+  }
+
+  function displayCountLove() {
+    document.getElementById("statscountlove").innerHTML = countLove();
+  }
+</script>
+
+<!--include footer-->
+<%- include('partials/_footer') %>
+<!--/include footer-->

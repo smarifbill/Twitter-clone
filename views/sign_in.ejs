@@ -1,0 +1,118 @@
+<!--include header-->
+<%- include('partials/_header') %>
+<!--/include header-->
+
+<!--Main Site-->
+<main id="site-main">
+  <div class="container">
+    <div class="header">
+      <h2>Login Account</h2>
+    </div>
+
+    <form class="form" id="form" action="/users/login" method="POST">
+      <div class="form-group">
+        <label>Username</label>
+        <input
+          type="email"
+          name="email"
+          placeholder="example@gmail.com"
+          id="email"
+        />
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error Message</small>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          id="password"
+        />
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error Message</small>
+      </div>
+
+      <button type="submit">Submit</button>
+      <p class="message">Not yet registered? <a href="/add-user">Sign Up</a></p>
+    </form>
+  </div>
+</main>
+<!--/Main Site-->
+
+<!--<script type="text/javascript" src="/static/js/formValidation.js"></script>-->
+<script type="text/javascript">
+  const form = document.getElementById("form");
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+
+  form.addEventListener("submit", (e) => {
+    //prevent the form from submitting
+    //comment out preventDefault()because it was not allowing form to submit
+    //e.preventDefault();
+
+    checkInput();
+  });
+
+  function checkInput() {
+    //get the values from the inputs
+    const emailValue = email.value.trim();
+    const passwordValue = password.value.trim();
+
+    if (emailValue === "") {
+      //show error & add error class
+      setError(email, "Email is required");
+    } else if (!isEmail(emailValue)) {
+      setError(email, "Email is not valid");
+    } else {
+      // add success class
+      setSuccess(email);
+    }
+
+    if (passwordValue === "") {
+      //show error & add error class
+      setError(password, "Password is required");
+    } else {
+      setSuccess(password);
+    }
+  }
+
+  function setError(input, message) {
+    const formControl = input.parentElement; //,form-control
+    const small = formControl.querySelector("small");
+
+    //add error message inside small
+    small.innerText = message;
+
+    //add error class
+    formControl.className = "form-group error";
+  }
+
+  function setSuccess(input) {
+    const formControl = input.parentElement; //,form-control
+
+    //add error class
+    formControl.className = "form-group success";
+  }
+
+  function isEmail(email) {
+    return /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+      email
+    );
+  }
+
+  /*
+  function checkPassword(password) {
+      var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,8}$/;
+      if(password.value.match(passw)) {
+        return true;
+      }
+  } 
+ */
+</script>
+
+<!--include footer-->
+<%- include('partials/_footer') %>
+<!--/include footer-->
